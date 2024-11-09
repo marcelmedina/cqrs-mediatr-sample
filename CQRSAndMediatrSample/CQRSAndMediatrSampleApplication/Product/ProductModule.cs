@@ -1,5 +1,5 @@
-﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace CQRSAndMediatrSampleApplication.Product
 {
@@ -7,7 +7,7 @@ namespace CQRSAndMediatrSampleApplication.Product
     {
         public static IServiceCollection AddProductModule(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddMediatR(typeof(ProductModule).Assembly);
+            serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             return serviceCollection;
         }
